@@ -5,13 +5,10 @@ import './Statistics.module.css';
 const Statistics = ({ good, neutral, bad, total, percentPositive }) => {
   return (
     <>
-      {' '}
-      {/* <h2>Statistics</h2> */}
       <p>Good: {good} </p>
       <p>Neutral: {neutral}</p>
       <p>Bad:{bad} </p>
       <p>Total:{total} </p>
-      {/* <p>Total:{good + neutral + bad} </p> */}
       <p>
         Positive feedback:
         {percentPositive} %{' '}
@@ -27,4 +24,5 @@ Statistics.propTypes = {
   total: PropTypes.number.isRequired,
   percentPositive: PropTypes.number.isRequired,
 };
+
 export default Statistics;

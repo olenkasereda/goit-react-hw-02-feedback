@@ -11,35 +11,13 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleButtonGood = () => {
-    console.log('Good button was clicked!'); // работает
-    console.log('this.props: ', this.props); // работает
+  onLeaveFeedback = option => {
     this.setState(prevState => {
-      console.log(prevState.good);
-      return { good: prevState.good + 1 };
-    });
-  };
-
-  handleButtonNeutral = () => {
-    console.log('Neutral button was clicked!');
-    this.setState(prevState => {
-      console.log(prevState.neutral);
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-
-  handleButtonBad = () => {
-    console.log('Bad button was clicked!');
-
-    this.setState(prevState => {
-      console.log(prevState.bad);
-      return { bad: prevState.bad + 1 };
+      return { [option]: prevState[option] + 1 };
     });
   };
 
   totalFeedback = () => {
-    // let total = this.state.good + this.state.neutral + this.state.bad;
-    // return total;
     return this.state.good + this.state.neutral + this.state.bad;
   };
 
@@ -58,9 +36,8 @@ export class App extends Component {
       <>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
-            handleButtonGood={this.handleButtonGood}
-            handleButtonNeutral={this.handleButtonNeutral}
-            handleButtonBad={this.handleButtonBad}
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
         <Section title={'Statistics'}>
