@@ -25,10 +25,7 @@ export class App extends Component {
     if (this.state.good === 0) {
       return 0;
     }
-    return Math.round(
-      (this.state.good * 100) /
-        (this.state.good + this.state.neutral + this.state.bad)
-    );
+    return Math.round((this.state.good * 100) / this.totalFeedback());
   };
 
   render() {
@@ -36,14 +33,12 @@ export class App extends Component {
       <>
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
         <Section title={'Statistics'}>
-          {this.totalFeedback() === 0 ? (
-            <Notification message={'There is no feedback'} />
-          ) : (
+          {this.totalFeedback() ? (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
@@ -51,6 +46,8 @@ export class App extends Component {
               total={this.totalFeedback()}
               percentPositive={this.percentPositiveFeedback()}
             />
+          ) : (
+            <Notification message={'There is no feedback'} />
           )}
         </Section>
       </>
